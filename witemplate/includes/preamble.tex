@@ -1,0 +1,105 @@
+%% You should use natbib
+\usepackage{natbib}
+
+%% You probably need appendix, if you want appendices
+\usepackage{appendix}
+
+%% the spacing in memoir is weird, you'll need to use this
+\DisemulatePackage{setspace}
+\usepackage[onehalfspacing]{setspace}
+
+%% List setup; the ``hanglist`` environment will allow you to have nicely-typeset enumerated lists (i.e. with the numbers hanging in the margins)
+\usepackage[loadonly]{enumitem2}
+\newlist{hanglist}{enumerate}{1} 
+\setlist[hanglist]{label=\arabic*.}
+\setlist[hanglist,1]{leftmargin=0pt}
+
+%% Comment out any of these that you don't want
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{theorem}
+\usepackage{hyperref}
+\usepackage{mathpartir}
+
+%% Get rid of ugly borders around PDF hyperlinks (e.g. for cross-references, bib entries, or URLs)
+\hypersetup{pdfborder = 0 0 0}
+
+%% You want microtype.
+\usepackage[protrusion=true,expansion=true]{microtype}
+
+%\pagestyle{thesisdraft}
+
+% Surround parts of graphics with box
+\usepackage{boxedminipage}
+
+%% booktabs (thx to Nate Rosenblum for bringing this beautiful package to my attention)
+\usepackage{booktabs}
+
+% If you want to generate a toc for each chapter (use with book)
+\usepackage{minitoc}
+
+% This is now the recommended way for checking for PDFLaTeX:
+\usepackage{ifpdf}
+
+%% Avoid ugly "Type 3" fonts
+\usepackage{lmodern}
+\usepackage[LY1]{fontenc}
+
+%% Substitute your favorite serif and sans fonts here....
+\usepackage{qpalatin}
+
+\usepackage[LY1]{eulervm}
+
+\ifpdf
+\usepackage[pdftex]{graphicx}
+\else
+\usepackage{graphicx}
+\fi
+
+\usepackage{makeidx}
+\makeindex
+
+%%% snip? (begin) %%%
+
+\def\@begintheorem#1#2{
+\sl\trivlist\item[\hskip\labelsep{\bf #1\ #2.}]}
+\def\@opargbegintheorem#1#2#3{
+\sl\trivlist\item[\hskip\labelsep{\bf #1\ #2\ \rm(#3).}]}
+%
+%--------------------------------------------------------------------------
+%
+
+{\theorembodyfont{\upshape} 
+ 
+\newtheorem{thm}{Theorem}[chapter]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{define}[thm]{Definition}
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem{exmpl}[thm]{Example}
+}
+
+%%% snip? (end) %%%
+
+%%% bib nonsense
+\makeatletter
+\newenvironment{wb-bib}[1]{%
+  \chapter*{references}
+\ifnobibintoc\else 
+\phantomsection 
+\addcontentsline{toc}{chapter}{References} 
+\fi 
+\prebibhook
+  \begin{bibitemlist}{#1}}{\end{bibitemlist}\postbibhook}
+
+\AtBeginDocument{%
+  \@ifpackageloaded{natbib}{% natbib is loaded
+    \addtodef{\endthebibliography}{}{\vskip-\lastskip\postbibhook}
+    \@ifpackagewith{natbib}{sectionbib}{% with sectionbib option
+      \renewcommand{\bibsection}{\@memb@bsec}}%
+      {\renewcommand{\bibsection}{\@memb@bchap}}}%
+  {}
+  \@ifpackagewith{chapterbib}{sectionbib}{%
+    \renewcommand{\sectionbib}[2]{}
+    \renewcommand{\bibsection}{\@memb@bsec}}{}
+}
+\makeatother

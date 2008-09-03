@@ -1,0 +1,409 @@
+%%% This is mostly taken from withesis.cls and friends
+
+\makeatletter
+
+\newcounter {tocpage}
+\newcounter {lofpage}
+\newcounter {lotpage}
+\newcounter {listofheading}
+
+\newcommand\@thesistitlemedskip{0.25in}
+\newcommand\@thesistitlebigskip{0.6in}
+\newcommand{\degree}[1]{\gdef\@degree{#1}}
+\newcommand{\project}{\gdef\@doctype{A masters project report}}
+\newcommand{\prelim}{\gdef\@doctype{A preliminary report}}
+\newcommand{\thesis}{\gdef\@doctype{A thesis}}
+\newcommand{\dissertation}{\gdef\@doctype{A dissertation}}
+\newcommand{\department}[1]{\gdef\@department{(#1)}}
+
+\newenvironment{titlepage}
+ {\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
+  \else \newpage \fi \thispagestyle{empty}
+% \c@page\z@ -- deleted: count title page in thesis
+}{\if@restonecol\twocolumn \else \newpage \fi}
+
+\gdef\@degree{Doctor of Philosophy}    %Default is PhD
+\gdef\@doctype{A dissertation}         %Default is dissertation
+
+\gdef\@department{(Electrical Engineering)} % Default is Electical Engineering
+
+\renewcommand{\maketitle}{%
+  \begin{titlepage}
+%-----------------------------------------------------------------------------
+% -- The thesis office doesn't like thanks on title page.  Put it in
+% -- the acknowledgments.  This is here so you don't have to change
+% -- your titlepage when converting from report style. -> from Purdue, but I
+%        left it here since it seems compatible with UW-Madison, Eric
+%-----------------------------------------------------------------------------
+    \def\thanks##1{\typeout{Warning: `thanks' deleted from thesis titlepage.}}
+    \let\footnotesize\small \let\footnoterule\relax \setcounter{page}{1}
+    \vspace*{0.1in}
+    \begin{center}
+      {\textbf{\expandafter\uppercase\expandafter{\@title}}} \\[\@thesistitlebigskip]
+       by \\[\@thesistitlemedskip]
+      \@author \\[\@thesistitlebigskip]
+      \@doctype\ submitted in partial fulfillment of \\
+      the requirements for the degree of\\[\@thesistitlebigskip]
+      \@degree \\[\@thesistitlemedskip]
+      \@department \\[\@thesistitlebigskip]
+      at the \\[\@thesistitlebigskip]
+      UNIVERSITY OF WISCONSIN--MADISON\\[\@thesistitlebigskip]
+      \@date
+    \end{center}
+  \end{titlepage}
+  \setcounter{footnote}{0}
+  \setcounter{page}{1} %title page is NOT counted
+  \let\thanks\relax
+  \let\maketitle\relax \let\degree\relax \let\project\relax \let\prelim\relax
+  \let\department\relax
+  \gdef\@thanks{}\gdef\@degree{}\gdef\@doctype{}
+  \gdef\@department{}
+  %\gdef\@author{}\gdef\@title{}
+}
+
+
+%=============================================================================
+% ABSTRACT
+%=============================================================================
+% The abstract should begin with two single-spaced lines describing
+% the author and title in a standard format.  After these lines comes
+% the standard abstract.
+%=============================================================================
+\def\abstract{
+  \chapter*{Abstract}
+  \addcontentsline{toc}{chapter}{Abstract}
+  \relax\markboth{Abstract}{Abstract}}
+\def\endabstract{\par\newpage}
+
+
+%=============================================================================
+% UMI ABSTRACT
+%=============================================================================
+% The UMI abstract should begin with the author and title in a standard format.
+% After the author comes the advisor and university. After these lines comes
+% a bunch of double spaced text to make up the standard abstract.
+% After the abstract, the advisor's approval signature follows.
+% This page is not numbered and is delivered seperately to the thesis office.
+%=============================================================================
+
+\def\advisortitle#1{\gdef\@advisortitle{#1}}
+\def\advisorname#1{\gdef\@advisorname{#1}}
+\gdef\@advisortitle{Professor}
+\gdef\@advisorname{Cheer E.\ Place}
+
+\def\umiabstract{
+             \thispagestyle{empty}
+                  \addtocounter{page}{-1}
+                \begin{center}
+                  {\textbf{\expandafter\uppercase\expandafter{\@title}}}\\
+                  \vspace{12pt}
+                  \@author \\
+                  \vspace{12pt}
+                  Under the supervision of \@advisortitle\ \@advisorname\\
+                  At the University of Wisconsin-Madison
+                \end{center}
+}
+
+\def\endumiabstract{\vfill \hfill\@advisorname\par\newpage}
+
+
+%============================================================================
+% VERBATIMFILE
+%============================================================================
+% \verbatimfile{<filename>}    for verbatim inclusion of a file
+% - Note that the precise layout of line breaks in this file is important!
+% - added the \singlespace - EB
+%============================================================================
+\def\verbatimfile#1{\begingroup \singlespace
+                    \@verbatim \frenchspacing \@vobeyspaces
+                    \input#1 \endgroup
+}
+
+
+%=============================================================================
+% SEPARATOR Pages
+%   Creates a blank page with a text centered horizontally and vertically.
+%   The page is neither counted nor numbered.
+%   These pages are required in the thesis format before sections such
+%   as appendices, vita, bibliography, etc.
+%=============================================================================
+\def\separatorpage#1{
+  \newpage
+  \thispagestyle{empty}
+  \addtocounter{page}{-1}
+  \null
+  \vfil\vfil
+  \begin{center}
+    {\textbf{#1}}
+  \end{center}
+  \vfil\vfil
+  \newpage}
+
+
+%=============================================================================
+% COPYRIGHTPAGE
+%=============================================================================
+% The copyright must do the following:
+% - start a new page with no number
+% - place the copyright text centered at the bottom.
+%=============================================================================
+\def\copyrightpage{
+  \newpage
+  \thispagestyle{empty}    % No page number
+  \addtocounter{page}{-1}
+  \chapter*{}            % Required for \vfill to work
+  \begin{center}
+   \vfill
+   \copyright\ Copyright by \@author\ \@date\\
+   All Rights Reserved
+  \end{center}}
+
+
+%=============================================================================
+% GLOSSARY
+%=============================================================================
+% The glossary environment must do the following:
+% - produce the table of contents entry for the glossary
+% - start a new page with GLOSSARY centered two inches from the top
+%=============================================================================
+\def\glossary{
+  \chapter*{GLOSSARY}
+  \addcontentsline{toc}{chapter}{Glossary}}
+\def\endglossary{\par\newpage}
+
+%=============================================================================
+% NOMENCLATURE
+%=============================================================================
+% The nomenclature environment must do the following:
+% - produce the table of contents entry for the nomenclature section
+% - start a new page with NOMENCLATURE centered two inches from the top
+%=============================================================================
+\def\nomenclature{\separatorpage{DISCARD THIS PAGE}
+  \chapter*{Nomenclature}
+  \addcontentsline{toc}{chapter}{NOMENCLATURE}}
+\def\endnomenclature{\par\newpage}
+
+%=============================================================================
+% CONVENTIONS
+%=============================================================================
+% The conventions environment must do the following:
+% - produce the table of contents entry for the nomenclature section
+% - start a new page with CONVENTIONS centered two inches from the top
+%=============================================================================
+\def\conventions{\separatorpage{DISCARD THIS PAGE}
+  \chapter*{Conventions}
+  \addcontentsline{toc}{chapter}{CONVENTIONS}}
+\def\endconventions{\par\newpage}
+
+
+%=============================================================================
+% COLOPHON
+%=============================================================================
+% The colophon environment must do the following:
+% - produce the table of contents entry for the nomenclature section
+% - start a new page with COLOPHON centered two inches from the top
+%=============================================================================
+\def\colophon{\separatorpage{DISCARD THIS PAGE}
+  \chapter*{Colophon}
+  \addcontentsline{toc}{chapter}{Colophon}}
+\def\endcolophon{\par\newpage}
+
+%=============================================================================
+% LIST OF SYMBOLS
+%=============================================================================
+% The list of symbols environment must do the following:
+% - produce the table of contents entry for the list of symbols section
+% - start a new page with LIST OF SYMBOLS centered two inches from the top
+%=============================================================================
+\def\listofsymbols{\separatorpage{DISCARD THIS PAGE}
+  \eject
+  \chapter*{LIST OF SYMBOLS}
+  \addcontentsline{toc}{chapter}{LIST OF SYMBOLS}}
+\def\endlistofsymbols{\par\newpage}
+
+%=============================================================================
+% VITA
+%=============================================================================
+% The vita environment must do the following:
+% - produce a separator page with the word vita centered
+% - produce the table of contents entry for the vita
+% - start a new page with VITA centered two inches from the top
+%=============================================================================
+\def\vita{
+%  \separatorpage{VITA}         % UW doesn't require this EB
+  \chapter*{VITA}
+  \addcontentsline{toc}{chapter}{VITA}}
+\def\endvita{\par\newpage}
+
+%=============================================================================
+% ACKNOWLEDGMENTS
+%=============================================================================
+% The acknowledgments environment must do the following:
+% - start a new page with ACKNOWLEDGMENTS centered two inches from the top
+%=============================================================================
+\def\acks{
+  \chapter*{Acknowledgments}
+}
+\def\endacks{\par\newpage}
+
+%=============================================================================
+% DEDICATION
+%=============================================================================
+% The dedication environment must do the following:
+% - start a new page
+% - center the text vertically
+% - include the text in a center environment
+%=============================================================================
+\def\dedication{
+  \newpage
+  \null\vfil
+  \begin{center}}
+\def\enddedication{\end{center}\par\vfil\newpage}
+
+%=============================================================================
+% DATE
+%=============================================================================
+%\def\today{\ifcase\month\or
+  %January\or February\or March\or April\or May\or June\or
+  %July\or August\or September\or October\or November\or December\fi
+  %\space\number\day, \number\year}
+\newcount\@testday
+\def\today{\@testday=\day
+  \ifnum\@testday>30 \advance\@testday by -30
+  \else\ifnum\@testday>20 \advance\@testday by -20
+  \fi\fi
+  \number\day\ \
+  \ifcase\month\or
+    January \or February \or March \or April \or May \or June \or
+    July \or August \or September \or October \or November \or December
+    \fi\ \number\year
+}
+
+
+%  Single counter for theorems and theorem-like environments:
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{assertion}[theorem]{Assertion}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{figger}[theorem]{Figure}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+
+%=============================================================================
+% TABLE OF CONTENTS; LIST OF FIGURES; LIST OF TABLES
+%=============================================================================
+% In report style, \tableofcontents, \listoffigures, etc. are always
+% set in single-column style.  @restonecol is used to keep track of
+% whether we need to switch back to double column style after the toc.
+%
+% The only known problem now is that the first page with the new
+% layout is too long.  The problem seems to be that the change to
+% textheight doesn't take place on the first page.  Even if it's the
+% first line in the table of contents macro.  Presumably the same
+% problem also occurs in the lof and lot.
+%
+% I'm taking a shot at fixing the problem by dropping in a throw-away
+% page between the change to the height parameters and the start of
+% the chapter.  Isn't elegance wonderful?
+%
+%=============================================================================
+
+% \def\@tableof#1#2#3#4#5{
+% { % limit scope of following declarations!!
+%   \@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn\fi
+%   \addtolength{\textheight}{-40pt}       % -24-16
+%   \addtolength{\majorheadskip}{-40pt}    % -24-16
+%   \addtolength{\headheight}{52pt}        %  36+16
+%   \addtolength{\headsep}{-12pt}          % -12
+%   \separatorpage{DISCARD THIS PAGE}
+%   \chapter*{#1}
+%   #5
+%   \relax\markboth{#1}{#1}
+%   \hbox to \hsize{#2 \hfil Page}
+%   \singlespace
+%   \setcounter{#3}{0}
+%   \setcounter{listofheading}{1}  % change from 0 to 1 by mccauley, 14may93
+%   \def\@oddhead{\vbox to \headheight{\vspace{4pt}
+%     \hbox to \hsize{\hfil\textrm{\thepage}} \vfil
+%     \ifnum\value{#3}=1
+%       \ifnum\value{listofheading}=2
+%         \hbox to \hsize{Appendix\hfil} \vspace{4pt} \fi
+%       \ifnum\value{listofheading}=1
+%         \stepcounter{listofheading} \fi
+%       \hbox to \hsize{#2 \hfil Page}
+%     \else
+%       \setcounter{#3}{1}
+%     \fi}}
+%   \def\@evenhead{\vbox to \headheight{\vspace{4pt}
+%     \hbox to \hsize{\textrm{\thepage}\hfil} \vfil
+%     \ifnum\value{#3}=1
+%       \ifnum\value{listofheading}=2
+%         \hbox to \hsize{Appendix\hfil} \vspace{4pt} \fi
+%       \ifnum\value{listofheading}=1
+%         \stepcounter{listofheading} \fi
+%       \hbox to \hsize{#2 \hfil Page}
+%     \else
+%       \setcounter{#3}{1}
+%     \fi}}
+%   \@starttoc{#4}  \if@restonecol\twocolumn\fi
+%   \newpage
+% }}
+% 
+% \def\tableofcontents{\@tableof{TABLE OF CONTENTS}{}{tocpage}{toc}{}}
+% 
+% \def\listoffigures{
+%   \@tableof{LIST OF FIGURES}{Figure}{lofpage}{lof}
+%   {\protect\addcontentsline{toc}{chapter}{LIST OF FIGURES}}}
+% 
+% \def\listoftables{
+%   \@tableof{LIST OF TABLES}{Table}{lotpage}{lot}
+%   {\protect\addcontentsline{toc}{chapter}{LIST OF TABLES}}}
+
+%=============================================================================
+% BIBLIOGRAPHY
+%=============================================================================
+% The thebibliography environment executes the following commands:
+%
+%  o start a new 'chapter' with BIBLIOGRAPHY as the heading
+%  o produce a separator page for the bibliography
+%
+%  \def\newblock{\hskip .11em plus .33em minus -.07em} --
+%      Defines the `closed' format, where the blocks (major units of
+%      information) of an entry run together.
+%
+%  \sloppy  -- Used because it's rather hard to do line breaks in
+%      bibliographies,
+%
+%  \sfcode`\.=1000\relax --
+%      Causes a `.' (period) not to produce an end-of-sentence space.
+%=============================================================================
+% \altbibtitle
+%   The default title for the References chapter is ``LIST OF REFERENCES''
+%   Since some people prefer ``BIBLIOGRAPHY'', the command
+%   \altbibtitle has been added to change the chapter title.
+%   This command does nothing more than change REFERENCES to BIBLIOGRAPHY
+%============================================================================
+\def\@bibchaptitle{Bibliography}
+\def\altbibtitle{\def\@bibchaptitle{Bibliography}}
+\def\thebibliography#1{
+  %\separatorpage{\@bibchaptitle}
+  \global\@bibpresenttrue
+  \chapter*{\@bibchaptitle\markboth{\@bibchaptitle}{\@bibchaptitle}}
+  \addcontentsline{toc}{chapter}{\@bibchaptitle}
+  \vspace{0.375in}    % added to match 4 line requirement
+  \interlinepenalty=10000 % added to prevent breaking of bib entries
+  \singlespace\list
+  {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+    \advance\leftmargin\labelsep \usecounter{enumi}}
+  \def\newblock{\hskip .11em plus .33em minus -.07em}
+  \sloppy
+  \sfcode`\.=1000\relax}
+\let\endthebibliography=\endlist
+
+
+
+\makeatother

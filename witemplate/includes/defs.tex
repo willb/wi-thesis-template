@@ -1,0 +1,25 @@
+%%%%% SVN, comment this out if you don't have svn-multi
+\usepackage{svn-multi} 
+
+%%%%% LISTINGS package and setup
+\usepackage{listings}
+
+%% put lstnewenvironment declarations here
+
+%% end lstnewenvironment declarations
+
+%% I put convenience definitions that will go in several chapters here
+
+%%%%% begin convenience definitions
+
+\makeatletter
+\newcommand{\wb@episource}{}
+\newenvironment{wbepi}[1]{\begin{quote}\renewcommand{\wb@episource}{#1}\itshape}{\par\upshape \raggedleft --- \textsc{\wb@episource}\\ \end{quote}}
+\makeatother
+
+
+%% Uncomment the second one and comment out the first one if you want to include subversion revision information in each file.
+\newcommand{\vcinfo}{}
+%\newcommand{\vcinfo}{\begin{centering}\fbox{\fbox{\parbox{5in}{Author: \svnauthor\\Revision: \svnfilerev\\Last changed on: \svnfiledate\\URL: \svnkw{HeadURL}}}}\\[1em]\end{centering}}
+
+%%%%% end convenience definitions

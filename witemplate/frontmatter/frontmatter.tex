@@ -1,0 +1,91 @@
+\svnidlong{$LastChangedBy$}{$LastChangedRevision$}{$LastChangedDate$}{$HeadURL: http://freevariable.com/dissertation/branches/diss-template/frontmatter/frontmatter.tex $}
+\vcinfo{}
+
+%%% BEGIN STUFF TAKEN FROM WITHESIS EXAMPLE FILE
+
+% COPYRIGHT PAGE
+%  - To include a copyright page use \copyrightpage
+\copyrightpage
+
+% DEDICATION
+\begin{dedication}
+	\emph{Please insert your dedication here.}
+\end{dedication}
+
+%% BEGIN PAGESTYLE
+
+%% You can pick a pagestyle if you want; see the memoir class documentation for more info.
+
+% \chapterstyle{pickone}
+% \pagestyle{pickone}
+
+% ACKNOWLEDGMENTS
+\begin{acks}
+\input{frontmatter/acks}
+\end{acks}
+
+% CONTENTS, TABLES, FIGURES
+\renewcommand{\printtoctitle}[1]{\chapter*{#1}}
+\renewcommand{\printloftitle}[1]{\chapter*{#1}}
+\renewcommand{\printlottitle}[1]{\chapter*{#1}}
+
+\renewcommand{\tocmark}{}
+\renewcommand{\lofmark}{}
+\renewcommand{\lotmark}{}
+
+\renewcommand{\tocheadstart}{}
+\renewcommand{\lofheadstart}{}
+\renewcommand{\lotheadstart}{}
+
+\renewcommand{\aftertoctitle}{}
+\renewcommand{\afterloftitle}{}
+\renewcommand{\afterlottitle}{}
+
+\renewcommand{\cftchapterfont}{\normalfont} 
+\renewcommand{\cftsectionfont}{\itshape} 
+\renewcommand{\cftchapterpagefont}{\normalfont} 
+\renewcommand{\cftchapterpresnum}{\bfseries} 
+\renewcommand{\cftchapterleader}{} 
+\renewcommand{\cftsectionleader}{} 
+\renewcommand{\cftchapterafterpnum}{\cftparfillskip} 
+\renewcommand{\cftsectionafterpnum}{\cftparfillskip} 
+
+% \captionnamefont{\small\sffamily} 
+% \captiontitlefont{\small\sffamily} 
+
+% \renewcommand{\contentsname}{contents}
+% \renewcommand{\listfigurename}{list of figures}
+% \renewcommand{\listtablename}{list of tables}
+
+\tableofcontents
+
+\clearpage
+\listoftables
+
+\clearpage
+\listoffigures
+
+\clearpage
+% NOMENCLATURE
+% \begin{conventions}
+% % \begin{description}
+% % \item{\makebox[0.75in][l]{term}
+% %        \parbox[t]{5in}{definition\\}}
+% % \end{description}
+% \input{conventions}
+% \end{conventions}
+
+\advisorname{Gottlob Frege}
+\advisortitle{Professor}
+% ABSTRACT
+\begin{umiabstract}
+  \input{frontmatter/abstract}
+\end{umiabstract}
+
+\begin{abstract}
+  \input{frontmatter/abstract}
+\end{abstract}
+
+\clearpage\pagenumbering{arabic}
+
+%%% END STUFF TAKEN FROM WITHESIS EXAMPLE FILE

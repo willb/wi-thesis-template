@@ -1,0 +1,58 @@
+%!TEX TS-program = pdflatex
+% main dissertation file
+\documentclass[12pt,oneside,letterpaper]{memoir}
+
+\input{includes/preamble}
+\input{includes/defs}
+\input{includes/thesisdefs}
+\svnidlong{$LastChangedBy$}{$LastChangedRevision$}{$LastChangedDate$}{$HeadURL: http://freevariable.com/dissertation/branches/diss-template/dissertation.tex $} 
+
+\clearpage\pagenumbering{roman}  % This makes the page numbers Roman (i, ii, etc)
+
+\title{Not Finished, But Abandoned}
+\author{Buckingham B.~Badger}
+\department{Computer Sciences}
+
+\date{2008}
+
+\begin{document}
+
+\nocite{*}
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+
+\maketitle
+
+%% Add \part declarations if you want, but it's not necessary
+%\part{Preliminaries}
+
+\include{frontmatter/frontmatter}
+
+%% Now include the tex files for each chapter, like so (I put these in separate dirs): 
+% \include{intro/intro}
+% \include{motivation/motivation}
+% \include{related/related}
+
+%% etc, etc.
+
+%% Do you have appendices?  If so, add them here, just like chapters.
+% \begin{appendices}
+% \include{backmatter/appendix1}
+% \end{appendices}
+
+%% Are you a big nerd with a colophon?  Add it here.
+\begin{colophon}
+\input{backmatter/colophon}
+\end{colophon}
+
+%% McBride is a very nice style (some version is included in this distribution)
+\bibliographystyle{mcbride}
+\bibliography{your-bib-file}
+
+%% Want an index?  Neither did I.
+%\printindex
+
+\end{document}

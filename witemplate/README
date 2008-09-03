@@ -1,0 +1,62 @@
+This is a dissertation template for UW Madison. It builds on
+memoir.cls (which you'll need to have installed) and on the 
+(venerable but subtly-broken) withesis.cls.  You'll want to 
+process your document with pdflatex; you'll want the following 
+packages installed (somewhere in your TEXINPUTS) as well:
+
+* natbib
+* microtype
+* booktabs
+* enumitem
+* theorem
+* svn-multi
+
+The following packages are used by default, but you can comment
+them out if you don't need/want them:
+
+* amssymb
+* amsmath
+* hyperref
+* mathpartir
+
+I suggest making one subdirectory for each chapter, and putting
+the .tex file and all of the figures for that chapter there.
+Then, simply \include each chapter in dissertation.tex.
+
+Other files of interest include:
+
+ * mcbride.bst:  this is included for convenience; if you 
+   have a later version, just delete this one
+
+ * backmatter/colophon.tex: if you're a big nerd and want to tell
+   everyone the excruciating details of your typesetting
+   adventures, this is the place.
+
+ * frontmatter/abstract.tex:  your abstract goes here
+
+ * frontmatter/acks.tex:  your acknowledgements go here
+
+ * frontmatter/frontmatter.tex: sets up the main structure for
+   the front matter of your diss
+
+ * includes/defs.tex: your commands/environments; includes one
+   for epigraphs at the beginning of chapters and one for
+   per-file SVN info
+
+ * includes/preamble.tex: this is where you want to set up your
+   chapter style (see the excellent memoir class documentation on
+   CTAN) and include any other packages you need
+
+ * includes/thesisdefs.tex: some definitions from the withesis
+   document class
+
+Feel free to email me with any questions, but please don't be
+offended if I don't reply in a timely or useful fashion --- I'm
+happy to help out, but this template is basically unsupported.
+Good luck!
+
+
+Will Benton <willb@acm.org>
+Madison, WI  2008
+
+ps: see http://web.willbenton.com/writing/2008/better-latex
