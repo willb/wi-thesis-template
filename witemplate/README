@@ -50,13 +50,15 @@ Other files of interest include:
  * includes/thesisdefs.tex: some definitions from the withesis
    document class
 
-Feel free to email me with any questions, but please don't be
-offended if I don't reply in a timely or useful fashion --- I'm
-happy to help out, but this template is basically unsupported.
+This template is basically unsupported, but you should feel free to
+email me questions -- just know that I might not be able to deliver
+a timely or useful reply.  (On the other hand, I absolutely welcome
+patches that provide fixes or functionality enhancements.)
+
 Good luck!
 
 
-Will Benton <willb@acm.org>
+Will Benton
 Madison, WI  2008
 
 ps: see http://web.willbenton.com/writing/2008/better-latex
