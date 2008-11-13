@@ -1,32 +1,36 @@
 This is a dissertation template for UW Madison. It builds on
-memoir.cls (which you'll need to have installed) and on the 
-(venerable but subtly-broken) withesis.cls.  You'll want to 
-process your document with pdflatex; you'll want the following 
-packages installed (somewhere in your TEXINPUTS) as well:
-
-* natbib
-* microtype
-* booktabs
-* enumitem
-* theorem
-* svn-multi
-
-The following packages are used by default, but you can comment
-them out if you don't need/want them:
+memoir.cls (which you'll need to have installed) and on the (venerable
+but subtly-broken) withesis.cls.  You'll want to process your document
+with pdflatex.  For best results, you'll want the following packages
+installed somewhere in your TEXINPUTS as well:
 
 * amssymb
 * amsmath
 * hyperref
+* theorem
+
+(Note that none of these are required, and that you can comment out
+any of those packages if you don't need to use them.)
+
+This package is included in the distribution, but you can use your own
+if you have a version more recent than 2007/06/30:
+
+* enumitem
+
+The following packages are used if you have them, but you can comment
+them out if you don't need/want them:
+
+* microtype
+* natbib
 * mathpartir
+* booktabs
+* svn-multi
 
 I suggest making one subdirectory for each chapter, and putting
 the .tex file and all of the figures for that chapter there.
 Then, simply \include each chapter in dissertation.tex.
 
 Other files of interest include:
-
- * mcbride.bst:  this is included for convenience; if you 
-   have a later version, just delete this one
 
  * backmatter/colophon.tex: if you're a big nerd and want to tell
    everyone the excruciating details of your typesetting
@@ -47,13 +51,31 @@ Other files of interest include:
    chapter style (see the excellent memoir class documentation on
    CTAN) and include any other packages you need
 
- * includes/thesisdefs.tex: some definitions from the withesis
+ * includes/thesisdefs.tex: some definitions adapted from the withesis
    document class
 
 This template is basically unsupported, but you should feel free to
 email me questions -- just know that I might not be able to deliver
 a timely or useful reply.  (On the other hand, I absolutely welcome
 patches that provide fixes or functionality enhancements.)
+
+For your convenience, this template includes two files that are not in
+some LaTeX distributions.  Both are covered under the terms of the
+LPPL; if you have a more recent version of either file, just delete
+the included versions.  (Note that the "hanglist" environment for
+nicely-typeset enumerated lists depends on a fairly recent version of
+enumitem.)
+
+ * mcbride.bst is copyrighted by Chung-chieh Shan
+ * enumitem.sty is copyrighted by Javier Bezos
+
+Again, these are available from CTAN and are only included here for
+your convenience.  If your local LaTeX installation has recent
+versions of these files, please 
+
+The definitions in defs/thesisdefs.tex are adapted from withesis.cls,
+which is licensed under the Perl Artistic License and is also
+available from CTAN.
 
 Good luck!
 

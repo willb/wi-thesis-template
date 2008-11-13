@@ -1,42 +1,82 @@
+% preamble.tex -- packages to include
+%
+% Wisconsin dissertation template
+% Copyright (c) 2008 William C. Benton.  All rights reserved.
+%
+% This program can redistributed and/or modified under the terms
+% of the LaTeX Project Public License Distributed from CTAN
+% archives in directory macros/latex/base/lppl.txt; either
+% version 1 of the License, or (at your option) any later version.
+%
+% This program includes other software that is licensed under the
+% terms of the LPPL and the Perl Artistic License; see README for details.
+%
+% You, the user, still hold the copyright to any document you produce
+% with this software (like your dissertation).
+
 %% You should use natbib
-\usepackage{natbib}
+\IfFileExists{natbib.sty}{%
+\usepackage{natbib}%
+}{}
 
 %% You probably need appendix, if you want appendices
-\usepackage{appendix}
+\IfFileExists{appendix.sty}{%
+\usepackage{appendix}%
+}{}
 
 %% the spacing in memoir is weird, you'll need to use this
 \DisemulatePackage{setspace}
 \usepackage[onehalfspacing]{setspace}
 
-%% List setup; the ``hanglist`` environment will allow you to have nicely-typeset enumerated lists (i.e. with the numbers hanging in the margins)
-\usepackage[loadonly]{enumitem}
-\newlist{hanglist}{enumerate}{1} 
-\setlist[hanglist]{label=\arabic*.}
-\setlist[hanglist,1]{leftmargin=0pt}
+%% List setup; the ``hanglist`` environment will allow you to have
+%% nicely-typeset enumerated lists (i.e. with the numbers hanging in
+%% the margins).  You need at least version 2.1 of enumitem.sty.  If
+%% you don't have enumitem installed at all, hanglist will just be an
+%% alias for enumerate.
+\IfFileExists{enumitem.sty}{%
+\usepackage[loadonly]{enumitem}[2007/06/30]%
+\newlist{hanglist}{enumerate}{1}% 
+\setlist[hanglist]{label=\arabic*.}%
+\setlist[hanglist,1]{leftmargin=0pt}%
+}{%
+\newenvironment{hanglist}{\begin{enumerate}}{\end{enumerate}}%
+}
 
 %% Comment out any of these that you don't want
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{theorem}
 \usepackage{hyperref}
-\usepackage{mathpartir}
+
+\IfFileExists{mathpartir.sty}{%
+\usepackage{mathpartir}%
+}{}
+
+%%%%% LISTINGS package and setup
+\IfFileExists{listings.sty}{%
+\usepackage{listings}%
+}{}
+
+
 
 %% Get rid of ugly borders around PDF hyperlinks (e.g. for cross-references, bib entries, or URLs)
 \hypersetup{pdfborder = 0 0 0}
 
 %% You want microtype.
-\usepackage[protrusion=true,expansion=true]{microtype}
+\IfFileExists{microtype.sty}{%
+\usepackage[protrusion=true,expansion=true]{microtype}%
+}{}
 
 %\pagestyle{thesisdraft}
 
 % Surround parts of graphics with box
 \usepackage{boxedminipage}
 
-%% booktabs (thx to Nate Rosenblum for bringing this beautiful package to my attention)
-\usepackage{booktabs}
-
-% If you want to generate a toc for each chapter (use with book)
-\usepackage{minitoc}
+%% booktabs (thx to Nate Rosenblum for bringing this beautiful package
+%% to my attention)
+\IfFileExists{booktabs.sty}{%
+\usepackage{booktabs}%
+}{}
 
 % This is now the recommended way for checking for PDFLaTeX:
 \usepackage{ifpdf}
@@ -46,7 +86,10 @@
 \usepackage[LY1]{fontenc}
 
 %% Substitute your favorite serif and sans fonts here....
-\usepackage{qpalatin}
+\IfFileExists{tgpagella.sty}{%
+% TeX Gyre pagella, like Palatino
+\usepackage{tgpagella}%
+}{}
 
 \usepackage[LY1]{eulervm}
 

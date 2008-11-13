@@ -1,10 +1,21 @@
-%%%%% SVN, comment this out if you don't have svn-multi
-\usepackage{svn-multi} 
+% defs.tex -- wbepi environment for chapter epigraphs and other useful defs.
+%
+% Wisconsin dissertation template
+% Copyright (c) 2008 William C. Benton.  All rights reserved.
+%
+% This program can redistributed and/or modified under the terms
+% of the LaTeX Project Public License Distributed from CTAN
+% archives in directory macros/latex/base/lppl.txt; either
+% version 1 of the License, or (at your option) any later version.
+%
+% This program includes other software that is licensed under the
+% terms of the LPPL and the Perl Artistic License; see README for details.
+%
+% You, the user, still hold the copyright to any document you produce
+% with this software (like your dissertation).
 
-%%%%% LISTINGS package and setup
-\usepackage{listings}
 
-%% put lstnewenvironment declarations here
+%% put lstnewenvironment declarations here, if you're using listings
 
 %% end lstnewenvironment declarations
 
@@ -17,9 +28,20 @@
 \newenvironment{wbepi}[1]{\begin{quote}\renewcommand{\wb@episource}{#1}\itshape}{\par\upshape \raggedleft --- \textsc{\wb@episource}\\ \end{quote}}
 \makeatother
 
-
-%% Uncomment the second one and comment out the first one if you want to include subversion revision information in each file.
-\newcommand{\vcinfo}{}
-%\newcommand{\vcinfo}{\begin{centering}\fbox{\fbox{\parbox{5in}{Author: \svnauthor\\Revision: \svnfilerev\\Last changed on: \svnfiledate\\URL: \svnkw{HeadURL}}}}\\[1em]\end{centering}}
+%%%%% SVN
+\IfFileExists{svn-multi.sty}{%
+\usepackage{svn-multi}%
+%% Uncomment the second one and comment out the first one if you want
+%% to include subversion revision information in each file.
+\newcommand{\vcinfo}{}%
+%\newcommand{\vcinfo}{\begin{centering}\fbox{\fbox{\parbox{5in}{Author: \svnauthor\\Revision: \svnfilerev\\Last changed on: \svnfiledate\\URL: \svnkw{HeadURL}}}}\\[1em]\end{centering}}%
+}{%
+\newcommand{\svnidlong}[4]{}%
+\newcommand{\svnfilerev}{}%
+\newcommand{\svnauthor}{}%
+\newcommand{\svnfiledate}{}%
+\newcommand{\svnkw}{}%
+\newcommand{\vcinfo}{}%
+}
 
 %%%%% end convenience definitions
