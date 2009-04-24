@@ -30,6 +30,14 @@ I suggest making one subdirectory for each chapter, and putting
 the .tex file and all of the figures for that chapter there.
 Then, simply \include each chapter in dissertation.tex.
 
+By default, your pages and chapter headings should be set up to
+conform to the UW typesetting requirements.  If you are making a
+version of your dissertation that doesn't require conformance to
+typewriter-era requirements (e.g. for the web or to make a nice
+printed copy), you'll want to create your own page and chapter styles
+in includes/preamble.tex and change frontmatter/frontmatter.tex to
+select your styles instead of the "deposit" styles.
+
 Other files of interest include:
 
  * backmatter/colophon.tex: if you're a big nerd and want to tell
@@ -48,8 +56,8 @@ Other files of interest include:
    per-file SVN info
 
  * includes/preamble.tex: this is where you want to set up your
-   chapter style (see the excellent memoir class documentation on
-   CTAN) and include any other packages you need
+   chapter and page styles (see the excellent memoir class
+   documentation on CTAN) and include any other packages you need
 
  * includes/thesisdefs.tex: some definitions adapted from the withesis
    document class

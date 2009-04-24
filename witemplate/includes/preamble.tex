@@ -123,6 +123,45 @@
 
 %%% snip? (end) %%%
 
+%%% NB: the ``deposit'' chapter- and page- styles should conform to UW
+%%% requirements.  If you are producing a pretty version of your
+%%% dissertation for web use later, you will certainly want to make
+%%% your own chapter and page styles.
+
+\makechapterstyle{deposit}{%
+  \renewcommand{\chapterheadstart}{}
+  \renewcommand{\printchaptername}{}
+  \renewcommand{\chapternamenum}{}
+  \renewcommand{\printchapternum}{\parbox{2em}{\MakeLowercase{\Large\scshape\thechapter{}}} }
+  \renewcommand{\afterchapternum}{}
+  \renewcommand{\printchaptertitle}[1]{%
+  \raggedright\Large\scshape\MakeLowercase{##1}}
+  \renewcommand{\afterchaptertitle}{%
+  \vskip\onelineskip \hrule\vskip\onelineskip}
+}
+
+\makepagestyle{deposit}
+ 
+\makeatletter
+ 
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+ 
+\makeevenfoot{deposit}{}{}{}
+\makeoddfoot{deposit}{}{}{}
+\makeevenhead{deposit}{\thepage}{}{}
+\makeoddhead{deposit}{}{}{\thepage}
+\makeatother
+
+%%% set up page numbering for chapter pages to satisfy UW requirements
+%%% NB: You will want to delete until the ``SNIP'' mark if you are
+%%% making a ``nice'' copy
+\copypagestyle{chapter}{plain}
+\makeoddfoot{chapter}{}{}{}
+\makeevenhead{chapter}{\thepage}{}{}
+\makeoddhead{chapter}{}{}{\thepage}
+%%% SNIP
+
 %%% bib nonsense
 \makeatletter
 \newenvironment{wb-bib}[1]{%

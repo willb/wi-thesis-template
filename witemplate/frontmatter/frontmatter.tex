@@ -1,7 +1,7 @@
 \svnidlong{$LastChangedBy$}{$LastChangedRevision$}{$LastChangedDate$}{$HeadURL: http://freevariable.com/dissertation/branches/diss-template/frontmatter/frontmatter.tex $}
 \vcinfo{}
 
-%%% BEGIN STUFF TAKEN FROM WITHESIS EXAMPLE FILE
+%%% SOME OF THIS CODE IS ADAPTED FROM THE VENERABLE withesis.cls
 
 % COPYRIGHT PAGE
 %  - To include a copyright page use \copyrightpage
@@ -14,10 +14,16 @@
 
 %% BEGIN PAGESTYLE
 
-%% You can pick a pagestyle if you want; see the memoir class documentation for more info.
+%%% You can pick a pagestyle if you want; see the memoir class
+%%% documentation for more info.  The default ``deposit'' option meets
+%%% the UW thesis typesetting requirements but is probably
+%%% unsatisfactory for making a version of your dissertation that
+%%% won't be deposited to the graduate school (e.g. for web or a nice
+%%% printed copy)
 
-% \chapterstyle{pickone}
-% \pagestyle{pickone}
+\chapterstyle{deposit}
+\pagestyle{deposit}
+
 
 % ACKNOWLEDGMENTS
 \begin{acks}
