@@ -45,7 +45,8 @@
 %% Comment out any of these that you don't want
 \usepackage{amssymb}
 \usepackage{amsmath}
-\usepackage{theorem}
+\usepackage{amsthm}
+%\usepackage{theorem}
 \usepackage{hyperref}
 
 \IfFileExists{mathpartir.sty}{%
@@ -102,26 +103,30 @@
 \usepackage{makeidx}
 \makeindex
 
-%%% snip? (begin) %%%
-
-\def\@begintheorem#1#2{
-\sl\trivlist\item[\hskip\labelsep{\bf #1\ #2.}]}
-\def\@opargbegintheorem#1#2#3{
-\sl\trivlist\item[\hskip\labelsep{\bf #1\ #2\ \rm(#3).}]}
-%
-%--------------------------------------------------------------------------
-%
-
-{\theorembodyfont{\upshape} 
- 
+{\theoremstyle{plain}
 \newtheorem{thm}{Theorem}[chapter]
 \newtheorem{cor}[thm]{Corollary}
 \newtheorem{define}[thm]{Definition}
-\newtheorem{rmk}[thm]{Remark}
 \newtheorem{exmpl}[thm]{Example}
 }
+{\theoremstyle{remark}
+\newtheorem{rmk}[thm]{Remark}
+}
 
-%%% snip? (end) %%%
+\newtheoremstyle{customsty1}
+{3pt}%
+{3pt}%
+{}% --- body font
+{}% --- indent amount
+{\bfseries}% --- Theorem head font
+{:}% --- Punctuation after head
+{.5em}% --- space after head
+{}% --- theorem head spec (can be left empty, meaning 'normal')
+
+% Define 'newtheorems' that use ``customsty1''
+{\theoremstyle{customsty1} 
+}
+
 
 %%% NB: the ``deposit'' chapter- and page- styles should conform to UW
 %%% requirements.  If you are producing a pretty version of your
