@@ -79,7 +79,8 @@ enumitem.)
 
 Again, these are available from CTAN and are only included here for
 your convenience.  If your local LaTeX installation has recent
-versions of these files, please 
+versions of these files, please remove the bundled copies and use
+your local ones instead.
 
 The definitions in defs/thesisdefs.tex are adapted from withesis.cls,
 which is licensed under the Perl Artistic License and is also
