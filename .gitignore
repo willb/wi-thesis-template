@@ -9,6 +9,7 @@
 *.lof
 *.idx
 *.aux
+*.bbl
 *.fls
 *.fdb_latexmk
 
