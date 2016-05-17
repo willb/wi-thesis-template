@@ -1,0 +1,24 @@
+# LaTeX Generated Files #
+#########################
+*.log
+*.ind
+*.ilg
+*.toc
+*.out
+*.lot
+*.lof
+*.idx
+*.aux
+*.bbl
+*.fls
+*.fdb_latexmk
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
